@@ -1,99 +1,117 @@
-# Raspberry Pi Vulnerability Assessment Lab
+Raspberry Pi Vulnerability Assessment Lab
 
-This repository documents a full hands-on vulnerability assessment and
-hardening process performed on a Raspberry Pi web server running Apache
-and SSH.
+This project documents a complete vulnerability assessment and remediation workflow performed on a Raspberry Pi web server running Apache and SSH.
 
-This project demonstrates real-world SOC and CySA+ skills including:
-- Nmap scanning (version detection + vuln scripts)
-- CVE interpretation
-- Apache & SSH hardening
-- Linux security configuration
-- Risk scoring (CVSS)
-- Remediation planning
-- Professional SOC-style reporting
+The goal was to identify real-world vulnerabilities, apply security hardening, and validate improvements using before/after Nmap NSE vulnerability scans.
 
----
+ Tools Used
 
-## 📌 Project Overview
+Nmap + NSE vuln scripts (--script vuln)
 
-**Target Device:** Raspberry Pi (Local Lab System)  
-**OS:** Raspberry Pi OS  
-**Services Tested:**  
-- SSH (Port 22)  
-- Apache Web Server (Port 80)
+Zenmap GUI
 
-**Tools Used:**  
-- Nmap (`-sV --script vuln`)
-- Zenmap GUI
-- Raspberry Pi OS Security Configs
+Raspberry Pi OS
 
-This is a lab project intended for education, portfolio building, and
-security practice.
+Apache2 (2.4.x)
 
----
+OpenSSH 8.4p1
 
-## 🧪 Contents of This Repository
+Windows 11 workstation
 
-### 📁 Reports/
-Contains full vulnerability assessment documentation.
+ BEFORE HARDENING (Vulnerable State)
 
-### 📁 Scripts/
-Includes reusable scripts such as:
-- Automated Nmap vuln scan
+Before applying fixes, the Raspberry Pi was running outdated services:
 
-### 📁 Configs/
-Contains hardening configs for:
-- SSH
-- Apache
+Apache 2.4.25 → dozens of HIGH/CRITICAL CVEs
 
-### 📁 Screenshots/
-Place any terminal or Zenmap screenshots here for visual evidence.
+Apache request smuggling
 
----
+Memory corruption flaws
 
-## 🧰 Skills Demonstrated
+Outdated modules
 
-- Reconnaissance & enumeration  
-- Vulnerability discovery  
-- Mapping findings to CVEs  
-- Using CVSS scoring to prioritize risks  
-- Linux service hardening  
-- Writing a professional remediation plan  
-- Post-remediation validation  
+DoS vulnerabilities
 
----
+Directory indexing enabled
 
-## 🚨 High-Level Summary of Findings
+Missing security headers
 
-- **Critical Apache CVEs**
-- **Persistent connection DoS risk**
-- **Weak SSH algorithms**
-- **Missing HTTP security headers**
-- **Directory enumeration enabled**
-- **Information disclosure in headers**
+OpenSSH 8.4p1 → version-based CVEs
 
-Detailed findings:  
-👉 `Reports/vuln-assessment-2025-11-22.md`
+Public exploit paths
 
----
+Weak ciphers/KEX/MACs found
 
-## 🔧 Hardening Steps Implemented
+Privilege escalation CVEs
 
-- Updated and patched Apache  
-- Removed insecure modules  
-- Added security headers  
-- Enhanced SSH crypto suite  
-- Disabled directory listing  
-- Reduced banner information leakage  
+RCE findings (based on version)
 
-Config files available in:  
-👉 `Configs/`
+ Files:
 
----
+scan-before-fix.md
 
-## 📜 Validation Steps After Fixes
+scan-before-fix.nmap
 
-1. Re-run Nmap:
-   ```bash
-   nmap -sV --script vuln <Your-IP-Here>
+ AFTER HARDENING (Patched + Secured)
+
+Changes applied:
+
+✔ Apache upgraded to 2.4.65
+✔ Security headers added:
+
+X-XSS-Protection
+
+X-Frame-Options
+
+X-Content-Type-Options
+
+Content-Security-Policy
+
+Referrer-Policy
+
+✔ Directory listing disabled
+✔ mod_reqtimeout enabled (DoS protection)
+✔ SSH crypto hardened:
+
+curve25519 KEX
+
+aes256-gcm and chacha20 ciphers
+
+SHA256/SHA512 MACs
+
+✔ Risk significantly reduced
+
+Remaining SSH issues are OS-level version CVEs not patched by Raspbian yet.
+
+ Files:
+
+scan-after-fix.md
+
+scan-after-fix.nmap
+
+ Risk Reduction Summary
+Severity	Before	After
+Critical	3	0
+High	6	1–2 (SSH version CVEs)
+Medium	7	2
+Low	2	1
+Skills Demonstrated
+
+Vulnerability scanning with Nmap
+
+CVSS & CVE interpretation
+
+Exploit correlation (GitHub + PacketStorm)
+
+Apache and SSH hardening
+
+Linux server configuration
+
+Before/after remediation validation
+
+Professional documentation and GitHub portfolio management
+
+ Author
+
+Jerald Burgess
+Cybersecurity Analyst | Security+ | SOC Analyst (Entry-Level)
