@@ -114,4 +114,4 @@ Professional documentation and GitHub portfolio management
  Author
 
 Jerald Burgess
-Cybersecurity Analyst | Security+ | SOC Analyst (Entry-Level)
+Cybersecurity Analyst | Security+ | SOC Analyst 
