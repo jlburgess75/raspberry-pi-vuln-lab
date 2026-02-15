@@ -31,9 +31,6 @@ The assessment followed a structured workflow:
 
 ---
 
-## Step 3 — Add a “Findings & Risk” table (copy/paste)
-Add this section under Methodology:
-
 ```md
 ## Findings & Risk Classification (Example)
 
